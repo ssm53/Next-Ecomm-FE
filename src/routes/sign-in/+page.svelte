@@ -20,9 +20,9 @@
 		email = event.target.email.value;
 		password = event.target.password.value;
 
-		const { success } = await authenticateUser(email, password);
+		const res = await authenticateUser(email, password);
 
-		if (success) {
+		if (res.success) {
 			// // spinner shits
 			// loading.update((value) => {
 			// 	return false;
@@ -32,9 +32,10 @@
 			// loginSucAlert();
 		} else {
 			// formErrors = res.data;
-			if (res.error) {
-				formErrors = res.error; // Update formErrors with validation errors
+			if (res.res.error) {
+				formErrors = res.res.error; // Update formErrors with validation errors
 			}
+
 			// loading.update((value) => {
 			// 	return false;
 			// });
@@ -61,7 +62,7 @@
 					<span class="label-text text-gray-200">Email</span>
 				</label>
 				<input type="text" name="email" placeholder="johndoe" class="input input-bordered w-full" />
-				{#if 'username' in formErrors}
+				{#if 'email' in formErrors}
 					<label class="label" for="email">
 						<span class="label-text-alt text-red-500">{formErrors['email']}</span>
 					</label>
