@@ -1,6 +1,7 @@
 <script>
 	import { authenticateUser } from '../../utils/auth';
 	import { goto } from '$app/navigation';
+	import { showLoginAlert, loginSucAlert } from '../../utils/alert';
 	// import Spinner from '../../spinner/spinner.svelte';
 	// import { loading } from '../../store/store';
 	// import { loginSucAlert, showLoginAlert } from '../../utils/alert';
@@ -29,7 +30,7 @@
 			// });
 			// Successful login, navigate to the home page
 			goto('/');
-			// loginSucAlert();
+			loginSucAlert();
 		} else {
 			// formErrors = res.data;
 			if (res.res.error) {
@@ -39,7 +40,7 @@
 			// loading.update((value) => {
 			// 	return false;
 			// });
-			// showLoginAlert();
+			showLoginAlert();
 			// showAlert = true;
 		}
 	}
