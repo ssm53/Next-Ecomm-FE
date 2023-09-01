@@ -17,12 +17,18 @@ function resetTimeout() {
 
 // create all alert functions
 
-// export function signUpAlert() {
-// 	// used
-// 	successAlert.set(true);
-// 	alertMessage.set('sign up successful');
-// 	resetTimeout();
-// }
+export function signUpAlert() {
+	// used
+	successAlert.set(true);
+	alertMessage.set('sign up successful');
+	resetTimeout();
+}
+
+export function signUpEmailTaken() {
+	warningAlert.set(true);
+	alertMessage.set('Email already taken');
+	resetTimeout();
+}
 
 // export function logInAlert() {
 // 	warningAlert.set(true);

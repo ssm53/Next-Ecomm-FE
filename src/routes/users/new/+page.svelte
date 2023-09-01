@@ -1,10 +1,12 @@
 <script>
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
+	import { signUpAlert, signUpEmailTaken } from '../../../utils/alert';
 
 	let formErrors = {};
 
 	export function postSignUp() {
+		signUpAlert();
 		goto('/');
 	}
 
@@ -42,6 +44,8 @@
 			// } else {
 			// 	throw 'Sign up succeeded but authentication failed';
 			// }
+		} else if (resp.status == 500) {
+			signUpEmailTaken();
 		} else {
 			const res = await resp.json();
 
