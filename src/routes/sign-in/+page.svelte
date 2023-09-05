@@ -1,5 +1,5 @@
 <script>
-	import { authenticateUser } from '../../utils/auth';
+	import { authenticateUser, getTokenFromLocalStorage } from '../../utils/auth';
 	import { goto } from '$app/navigation';
 	import { showLoginAlert, loginSucAlert } from '../../utils/alert';
 	// import Spinner from '../../spinner/spinner.svelte';

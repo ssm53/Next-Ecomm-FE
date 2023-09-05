@@ -41,3 +41,11 @@ export async function authenticateUser(email, password) {
 		};
 	}
 }
+
+export function getTokenFromLocalStorage() {
+	let auth = localStorage.getItem('auth');
+	if (auth) {
+		return JSON.parse(auth)['token'];
+	}
+	return null;
+}
