@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { getTokenFromLocalStorage } from '../../utils/auth';
 	// import { signUpAlert, signUpEmailTaken } from '../../../utils/alert';
+	import { uploadMedia } from '../../utils/s3-uploader';
 
 	let formErrors = {};
 
@@ -12,12 +13,15 @@
 	}
 
 	async function uploadImage(evt) {
-		evt.preventDefault();
+		// evt.preventDefault();
+
+		const [fileName, fileUrl] = await uploadMedia(evt.target['file'].files[0]);
 
 		const imageData = {
 			title: evt.target['title'].value,
 			description: evt.target['description'].value,
-			price: parseInt(evt.target['price'].value)
+			price: parseInt(evt.target['price'].value),
+			url: fileUrl // this is our url for the picture... need to update schema also laterr
 		};
 
 		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload', {
@@ -41,8 +45,20 @@
 	}
 </script>
 
+<svelte:head>
+	<script src="/aws-sdk-s3.min.js"></script>
+</svelte:head>
+
 <div class="flex justify-center items-center mt-8 bg-black">
-	<form on:submit={uploadImage} class="w-1/3">
+	<form on:submit|preventDefault={uploadImage} class="w-1/3">
+		<div class="form-control w-full">
+			<input type="file" name="file" />
+			{#if 'file' in formErrors}
+				<label class="label" for="file">
+					<span class="label-text-alt text-red-500">{formErrors['file']}</span>
+				</label>
+			{/if}
+		</div>
 		<div class="form-control w-full">
 			<label class="label" for="title">
 				<span class="label-text text-white">Title</span>
