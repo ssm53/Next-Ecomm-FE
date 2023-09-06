@@ -1,6 +1,24 @@
 // todo
 // implement images
-// do s3 amazon on front end
+// be able to buy images with stripe
+// need to create successurl and cancelurl (after payment done etc) - done
+// need to specify the product data {name: } in controller.js in backend
 
 //ISSUE
-// our prisma chema needs a new filed in images model... the url grom s3aws.. itll be string and needs to be unique..
+
+import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+
+export async function load({ fetch }) {
+	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/allPics');
+
+	const res = await resp.json();
+	if (resp.status == 200) {
+		return {
+			images: res.allImages
+		};
+	} else {
+		return {
+			images: []
+		};
+	}
+}
