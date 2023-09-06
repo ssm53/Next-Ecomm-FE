@@ -4,6 +4,11 @@
 	import { getTokenFromLocalStorage } from '../../utils/auth';
 	// import { signUpAlert, signUpEmailTaken } from '../../../utils/alert';
 	import { uploadMedia } from '../../utils/s3-uploader';
+	import {
+		PUBLIC_AWS_REGION,
+		PUBLIC_AWS_BUCKET,
+		PUBLIC_IDENTITY_POOL_ID
+	} from '$env/static/public';
 
 	let formErrors = {};
 

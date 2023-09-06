@@ -5,6 +5,7 @@
 	// import Spinner from '../../spinner/spinner.svelte';
 	// import { loading } from '../../store/store';
 	// import { loginSucAlert, showLoginAlert } from '../../utils/alert';
+	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 
 	let formErrors = {};
 
@@ -12,6 +13,7 @@
 	let password = '';
 
 	async function handleSubmit(event) {
+		console.log(PUBLIC_BACKEND_BASE_URL);
 		event.preventDefault();
 		// // spinner shit
 		// loading.update((value) => {
