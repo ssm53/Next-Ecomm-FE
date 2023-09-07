@@ -2,6 +2,31 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	export let data;
+
+	// Function to handle image deletion
+	async function deleteImage(imageId) {
+		console.log(imageId);
+		try {
+			const response = await fetch(PUBLIC_BACKEND_BASE_URL + `/deletePic/${imageId}`, {
+				method: 'DELETE'
+			});
+
+			const res = await response.json();
+
+			if (response.status === 204) {
+				goto('/my-images');
+			}
+			// do alerts for these
+			// else if (response.status === 404) {
+			// 	// Image not found, handle this case
+			// } else {
+			// 	// Handle other erros
+			// }
+		} catch (error) {
+			console.error('Error deleting image:', error);
+			// return res.error
+		}
+	}
 </script>
 
 <div class="bg-gray-100 min-h-screen">
@@ -21,7 +46,10 @@
 						<p class="text-gray-600">{image.description}</p>
 						<div class="flex items-center justify-between mt-4">
 							<span class="text-xl font-semibold">${image.price}</span>
-							<!-- You can add any actions related to the image here -->
+							<!-- Delete Button -->
+							<button on:click={deleteImage(image.id)} class="text-red-500 hover:text-red-700 ml-2">
+								Delete
+							</button>
 						</div>
 					</div>
 				</div>

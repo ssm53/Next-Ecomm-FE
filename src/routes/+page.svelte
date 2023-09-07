@@ -54,7 +54,7 @@
 
 	<main class="container mx-auto py-8">
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-			{#each data.images as image (image.id)}
+			{#each data.images as image}
 				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
 					<img src={image.url} alt="Product" class="w-full h-64 object-cover" />
 					<div class="p-4">
@@ -63,8 +63,9 @@
 						<div class="flex items-center justify-between mt-4">
 							<span class="text-xl font-semibold">${image.price}</span>
 							<button
-								class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
-								on:click={() => checkout(image.id)}
+								class=" px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
+								type="submit"
+								on:click={checkout(image.id)}
 							>
 								Buy Now
 							</button>
