@@ -18,11 +18,15 @@ export async function load({ fetch }) {
 	const res = await resp.json();
 
 	// added this for redirect
-	if (res.user !== userId) {
+	if (res.userid !== userId) {
 		throw redirect(307, `/`);
 	}
 
 	if (resp.status === 200) {
+		// console.log(res.userid);
+		// console.log(typeof res.userid);
+		// console.log(userId);
+		// console.log(typeof userId);
 		return {
 			images: res.myImages
 		};

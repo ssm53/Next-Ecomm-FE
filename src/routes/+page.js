@@ -1,8 +1,7 @@
 // todo
-// can see my jobs
+// user should be able to delete their photo - only loggedin and only theirs!
 
 //EXTRAS
-// user should be able to delete their photo - only loggedin and only theirs!
 // once bought, shouldnt be displayed anymore!
 // loggedin users can favourite pics
 
