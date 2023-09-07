@@ -1,4 +1,6 @@
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+import { loggedIn } from '../stores/store';
+import { goto } from '$app/navigation';
 
 export async function authenticateUser(email, password) {
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/auth', {
@@ -23,12 +25,12 @@ export async function authenticateUser(email, password) {
 				user: res.userId
 			})
 		);
-		// //shauns code
-		// loggedIn.update((value) => {
-		// 	return true;
-		// });
-		// goto('/');
 		//shauns code
+		loggedIn.update((value) => {
+			return true;
+		});
+		goto('/');
+		// shaun's code
 		return {
 			success: true,
 			res: res
@@ -48,4 +50,22 @@ export function getTokenFromLocalStorage() {
 		return JSON.parse(auth)['token'];
 	}
 	return null;
+}
+
+// Define emptyAuth with token and user set to null
+const emptyAuth = {
+	token: null,
+	user: null
+};
+export function logOut() {
+	localStorage.setItem('auth', JSON.stringify(emptyAuth));
+	//SHAUNS CODE
+	loggedIn.update((value) => {
+		return false;
+	});
+	goto('/');
+
+	//SHAUNS CODE
+
+	return true;
 }

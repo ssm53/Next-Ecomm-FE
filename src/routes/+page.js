@@ -1,11 +1,11 @@
 // todo
-// implement images
-
-// then once bought it shouldnt be displayed anymore
+// track how much he has earned, and how much we owe him
 
 //EXTRAS
-// user should be able to logout
+// user should be able to logout, and login - done
+// once bought, shouldnt be displayed anymore -
 // user should be able to delete their photo - only loggedin and only theirs
+// html and styling
 
 //ISSUE
 
