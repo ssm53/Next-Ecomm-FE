@@ -1,8 +1,11 @@
 // todo
 // implement images
-// be able to buy images with stripe
-// need to create successurl and cancelurl (after payment done etc) - done
-// need to specify the product data {name: } in controller.js in backend
+
+// then once bought it shouldnt be displayed anymore
+
+//EXTRAS
+// user should be able to logout
+// user should be able to delete their photo - only loggedin and only theirs
 
 //ISSUE
 
