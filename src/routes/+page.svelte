@@ -1,22 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	export let data;
-
-	// Function to log the session when the button is clicked
-	function logSession() {
-		fetch('/create-checkout-session', {
-			method: 'POST'
-			// You can include any necessary request headers here
-		})
-			.then((response) => response.json())
-			.then((session) => {
-				console.log(session);
-				// You can also perform any other actions here, such as redirecting to the Stripe Checkout page
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
-	}
 </script>
 
 <div class="overflow-x-auto w-full bg-white flex flex-col">
@@ -36,8 +21,8 @@
 			</div>
 		</div>
 		<div>
-			<form action="/create-checkout-session" method="POST">
-				<button on:click={logSession} type="submit">Checkout</button>
+			<form action="{PUBLIC_BACKEND_BASE_URL}/create-checkout-session" method="POST">
+				<button type="submit">Checkout</button>
 			</form>
 		</div>
 	{/each}
