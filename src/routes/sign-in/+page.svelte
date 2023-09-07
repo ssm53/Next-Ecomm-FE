@@ -48,155 +48,95 @@
 	}
 </script>
 
-<div class=" bg-black h-screen">
-	<!-- <Spinner /> -->
-	<div class="flex justify-center py-20">
-		<img
-			src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
-			alt="Home"
-			class=" w-32 rounded-lg"
-		/>
-	</div>
-
-	<div class="flex justify-center items-center py-8">
-		<form on:submit={handleSubmit} class="w-1/3">
-			<div class="login-control w-full">
-				<label class="label" for="email">
-					<span class="label-text text-gray-200">Email</span>
-				</label>
-				<input type="text" name="email" placeholder="johndoe" class="input input-bordered w-full" />
-				{#if 'email' in formErrors}
-					<label class="label" for="email">
-						<span class="label-text-alt text-red-500">{formErrors['email']}</span>
-					</label>
-				{/if}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+	<div class="max-w-md w-full space-y-8">
+		<div>
+			<img
+				class="mx-auto h-12 w-auto"
+				src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+				alt="Logo"
+			/>
+			<h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+				Sign in to your account
+			</h2>
+		</div>
+		<form class="mt-8 space-y-6" on:submit={handleSubmit}>
+			<input type="hidden" name="remember" value="true" />
+			<div class="rounded-md shadow-sm -space-y-px">
+				<div>
+					<label for="email-address" class="sr-only">Email address</label>
+					<input
+						id="email-address"
+						name="email"
+						type="email"
+						autocomplete="email"
+						required
+						class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+						placeholder="Email address"
+					/>
+					{#if 'email' in formErrors}
+						<p class="text-red-500 text-sm mt-1">{formErrors['email']}</p>
+					{/if}
+				</div>
+				<div>
+					<label for="password" class="sr-only">Password</label>
+					<input
+						id="password"
+						name="password"
+						type="password"
+						autocomplete="current-password"
+						required
+						class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+						placeholder="Password"
+					/>
+					{#if 'password' in formErrors}
+						<p class="text-red-500 text-sm mt-1">{formErrors['password']}</p>
+					{/if}
+				</div>
 			</div>
 
-			<div class="login-control w-full">
-				<label class="label" for="password">
-					<span class="label-text text-gray-200">Password</span>
-				</label>
-				<input
-					type="password"
-					name="password"
-					placeholder=""
-					class="input input-bordered w-full"
-					required
-				/>
-				{#if 'password' in formErrors}
-					<label class="label" for="password">
-						<span class="label-text-alt text-red-500">{formErrors['password']}</span>
-					</label>
-				{/if}
+			<div class="flex items-center justify-between">
+				<div class="flex items-center">
+					<input
+						id="remember-me"
+						name="remember-me"
+						type="checkbox"
+						class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+					/>
+					<label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+				</div>
+
+				<div class="text-sm">
+					<a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+						Forgot your password?
+					</a>
+				</div>
 			</div>
 
-			<!-- <div class=" relative login-control w-full mt-4 group">
-					<div class="absolute w-20 h-10 inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-75 rounded-lg blur-xl group-hover:opacity-100 transition duration-200"></div>
-				  <button class=" relative w-20 h-10 bg-black text-gray-300 group-hover:text-white transition duration-200 rounded-lg ">Login</button>
-			</div> -->
-			<div class=" relative login-control w-full mt-4 group">
-				<button class="neon-button">Login</button>
+			<div>
+				<button
+					type="submit"
+					class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				>
+					<span class="absolute left-0 inset-y-0 flex items-center pl-3">
+						<!-- Heroicon name: solid/lock-closed -->
+						<svg
+							class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M12 2a2 2 0 012 2v5.586l1.293-1.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 7.586V2a2 2 0 012-2zM4 9v9a2 2 0 002 2h8a2 2 0 002-2V9H4z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</span>
+					Sign in
+				</button>
 			</div>
 		</form>
 	</div>
-	<div class="flex flex-col justify-center items-center w-screen">
-		<div>
-			<p class="text-2xl font-bold text-white">They trust us</p>
-		</div>
-		<div class=" flex flex-row justify-center bg-gray-400 h-20 w-screen">
-			<img
-				src="https://metaschool.so/_next/static/media/job-logo-1.11002397.webp"
-				alt="ripple logo"
-				class=" max-w-full object-scale-down py-5"
-			/>
-			<img
-				src="https://metaschool.so/_next/static/media/job-logo-5.4e6c6ae6.webp"
-				alt="ripple logo"
-				class=" max-w-full object-scale-down py-5"
-			/>
-			<img
-				src="https://metaschool.so/_next/static/media/job-logo-7.1d699287.webp"
-				alt="ripple logo"
-				class=" max-w-full object-scale-down py-5"
-			/>
-			<img
-				src="https://metaschool.so/_next/static/media/job-logo-4.5b2a463a.webp"
-				alt="ripple logo"
-				class=" max-w-full object-scale-down py-5"
-			/>
-		</div>
-	</div>
 </div>
-
-<style>
-	:root {
-		--clr-neon: hsl(317 100% 54%);
-		--clr-bg: hsl(323 21% 16%);
-	}
-
-	.neon-button {
-		font-size: 1rem;
-		color: var(--clr-neon);
-		display: inline-block;
-		cursor: pointer;
-		text-decoration: none;
-		border: var(--clr-neon) 0.125em solid;
-		padding: 0.25em 1em;
-		border-radius: 0.25em;
-
-		text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
-
-		box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
-		position: relative;
-		transition: background-color 100ms linear;
-	}
-
-	.neon-button::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		box-shadow: 0 0 2em 0.5em var(--clr-neon);
-		opacity: 0;
-		transition: opacity 100ms linear;
-		background-color: var(--clr-neon);
-		z-index: -1;
-	}
-
-	.neon-button:hover::before,
-	.neon-button:focus::before {
-		opacity: 1;
-	}
-
-	.neon-button:hover::after,
-	.neon-button:focus::after {
-		opacity: 1;
-	}
-
-	.neon-button::before {
-		pointer-events: none;
-		content: '';
-		position: absolute;
-		background: var(--clr-neon);
-		top: 120%;
-		left: 0;
-		width: 100%;
-		height: 100%;
-
-		transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-		filter: blur(1.5em);
-		opacity: 0.7;
-	}
-
-	.neon-button:hover,
-	.neon-button:focus {
-		background-color: var(--clr-neon);
-		color: var(--clr-bg);
-		text-shadow: none;
-	}
-
-	.neon-button::after {
-	}
-</style>

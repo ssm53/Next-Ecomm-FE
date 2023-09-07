@@ -54,75 +54,83 @@
 	<script src="/aws-sdk-s3.min.js"></script>
 </svelte:head>
 
-<div class="flex justify-center items-center mt-8 bg-black">
-	<form on:submit|preventDefault={uploadImage} class="w-1/3">
-		<div class="form-control w-full">
-			<input type="file" name="file" />
-			{#if 'file' in formErrors}
-				<label class="label" for="file">
-					<span class="label-text-alt text-red-500">{formErrors['file']}</span>
-				</label>
-			{/if}
+<div class="bg-white min-h-screen">
+	<header class="bg-gray-100 shadow">
+		<div class="container mx-auto py-4">
+			<h1 class="text-2xl font-semibold text-gray-900">Upload Your Image</h1>
 		</div>
-		<div class="form-control w-full">
-			<label class="label" for="title">
-				<span class="label-text text-white">Title</span>
-			</label>
-			<input
-				type="text"
-				name="title"
-				placeholder="johndoe"
-				class="input input-bordered w-full text-white bg-black border-4 border-pink-500"
-			/>
-			{#if 'title' in formErrors}
-				<label class="label" for="title">
-					<span class="label-text-alt text-red-500">{formErrors['title']}</span>
-				</label>
-			{/if}
-		</div>
+	</header>
 
-		<div class="form-control w-full">
-			<label class="label" for="description">
-				<span class="label-text text-white">Description</span>
-			</label>
-			<input
-				type="text"
-				name="description"
-				placeholder="john@example.com"
-				class="input input-bordered w-full text-white bg-black border-4 border-pink-500"
-				required
-			/>
-			{#if 'description' in formErrors}
-				<label class="label" for="email">
-					<span class="label-text-alt text-red-500">{formErrors['description']}</span>
-				</label>
-			{/if}
-		</div>
+	<main class="container mx-auto py-8">
+		<div class="flex justify-center items-center">
+			<form on:submit|preventDefault={uploadImage} class="w-1/2 bg-white shadow-md rounded-lg p-8">
+				<div class="mb-6">
+					<label for="file" class="block text-gray-700 text-sm font-bold mb-2">
+						Choose an Image
+					</label>
+					<input
+						type="file"
+						name="file"
+						class="block w-full rounded-md py-2 px-3 border border-gray-300"
+					/>
+					{#if 'file' in formErrors}
+						<p class="text-red-500 text-xs mt-1">{formErrors['file']}</p>
+					{/if}
+				</div>
 
-		<div class="form-control w-full">
-			<label class="label" for="price">
-				<span class="label-text text-white">Price</span>
-			</label>
-			<input
-				type="number"
-				name="price"
-				placeholder=""
-				class="input input-bordered w-full text-white bg-black border-4 border-pink-500"
-				required
-				step="1"
-			/>
-			{#if 'price' in formErrors}
-				<label class="label" for="price">
-					<span class="label-text-alt text-red-500">{formErrors['price']}</span>
-				</label>
-			{/if}
-		</div>
+				<div class="mb-6">
+					<label for="title" class="block text-gray-700 text-sm font-bold mb-2"> Title </label>
+					<input
+						type="text"
+						name="title"
+						placeholder="Enter title"
+						class="block w-full rounded-md py-2 px-3 border border-gray-300"
+					/>
+					{#if 'title' in formErrors}
+						<p class="text-red-500 text-xs mt-1">{formErrors['title']}</p>
+					{/if}
+				</div>
 
-		<div class="form-control w-full mt-4">
-			<button
-				class="btn btn-md text-white border-4 border-pink-500 bg-black hover:bg-gray-700 hover:shadow hover:shadow-gray-700 hover:text-yellow-100"
-				>Upload Image</button
-			>
+				<div class="mb-6">
+					<label for="description" class="block text-gray-700 text-sm font-bold mb-2">
+						Description
+					</label>
+					<input
+						type="text"
+						name="description"
+						placeholder="Enter description"
+						class="block w-full rounded-md py-2 px-3 border border-gray-300"
+						required
+					/>
+					{#if 'description' in formErrors}
+						<p class="text-red-500 text-xs mt-1">{formErrors['description']}</p>
+					{/if}
+				</div>
+
+				<div class="mb-6">
+					<label for="price" class="block text-gray-700 text-sm font-bold mb-2"> Price </label>
+					<input
+						type="number"
+						name="price"
+						placeholder="Enter price"
+						class="block w-full rounded-md py-2 px-3 border border-gray-300"
+						required
+						step="1"
+					/>
+					{#if 'price' in formErrors}
+						<p class="text-red-500 text-xs mt-1">{formErrors['price']}</p>
+					{/if}
+				</div>
+
+				<div class="flex justify-end">
+					<button
+						class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md"
+						type="submit"
+					>
+						Upload Image
+					</button>
+				</div>
+			</form>
 		</div>
-	</form>
+	</main>
 </div>

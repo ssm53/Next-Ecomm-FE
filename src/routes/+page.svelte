@@ -45,33 +45,33 @@
 	// }
 </script>
 
-<div class="overflow-x-auto w-full bg-white flex flex-col">
-	{#each data.images as image}
-		<div class="flex justify-between flex-row">
-			<div>
-				<span>{image.title}</span>
-			</div>
-			<div>
-				<span>{image.price}</span>
-			</div>
-			<div>
-				<span>{image.description}</span>
-			</div>
-			<div>
-				<img src={image.url} alt="picture" />
-			</div>
+<div class="bg-gray-100 min-h-screen">
+	<header class="bg-white shadow">
+		<div class="container mx-auto py-4">
+			<h1 class="text-2xl font-semibold">Welcome to Our Store</h1>
 		</div>
-		<div>
-			<!-- <form on:submit={checkout(image.id)}> -->
-			<!-- <input type="hidden" name="title" value={image.title} />
-				<input type="hidden" name="description" value={image.description} />
-				<input type="hidden" name="price" value={image.price} />
-				<input type="hidden" name="url" value={image.url} /> -->
-			<button type="submit" on:click={checkout(image.id)}>Buy Now</button>
-			<!-- </form> -->
-			<!-- <form action="{PUBLIC_BACKEND_BASE_URL}/create-checkout-session" method="POST">
-				<button type="submit">Checkout</button>
-			</form> -->
+	</header>
+
+	<main class="container mx-auto py-8">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+			{#each data.images as image (image.id)}
+				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+					<img src={image.url} alt="Product" class="w-full h-64 object-cover" />
+					<div class="p-4">
+						<h2 class="text-lg font-semibold">{image.title}</h2>
+						<p class="text-gray-600">{image.description}</p>
+						<div class="flex items-center justify-between mt-4">
+							<span class="text-xl font-semibold">${image.price}</span>
+							<button
+								class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
+								on:click={() => checkout(image.id)}
+							>
+								Buy Now
+							</button>
+						</div>
+					</div>
+				</div>
+			{/each}
 		</div>
-	{/each}
+	</main>
 </div>

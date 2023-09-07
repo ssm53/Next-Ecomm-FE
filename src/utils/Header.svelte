@@ -27,13 +27,17 @@
 	function clickHome() {
 		goto('/');
 	}
+
+	function clickUpload() {
+		goto('/upload');
+	}
 </script>
 
 <main>
-	<div class=" bg-gray-700 flex flex-row h-14 justify-between items-center text-gray-700">
-		<div>
+	<div class="bg-black text-white">
+		<div class="container mx-auto flex justify-between items-center p-4">
 			<button
-				class=" ml-5 bg-black text-w p-3 rounded-full hover:shadow hover:shadow-white"
+				class="bg-black text-white p-3 rounded-full hover:bg-gray-900 focus:outline-none"
 				on:click={clickHome}
 			>
 				<img
@@ -42,35 +46,29 @@
 					class="w-8 h-7"
 				/>
 			</button>
-		</div>
-		<div class="flex">
-			{#if logIO === true}
-				<div>
+			<div class="flex space-x-4">
+				{#if logIO === true}
+					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={logOut}>
+						Log Out
+					</button>
 					<button
-						class=" bg-black text-white border-2 border-pink-500 p-3 rounded-full hover:shadow hover:shadow-white mr-5 w-40"
-						on:click={logOut}>log out</button
+						class="text-white hover:text-indigo-600 focus:outline-none"
+						on:click={clickUpload}
 					>
-				</div>
-			{:else}
-				<div>
+						Upload Image
+					</button>
+				{:else}
+					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={clickLogin}>
+						Log In
+					</button>
 					<button
-						class=" bg-black text-white border-2 border-pink-500 p-3 rounded-full hover:shadow hover:shadow-white mr-5 w-40"
-						on:click={clickLogin}>log in</button
+						class="text-white hover:text-indigo-600 focus:outline-none"
+						on:click={clickSignUp}
 					>
-				</div>
-				<div>
-					<button
-						class=" mr-5 bg-black text-white border-2 border-pink-500 p-3 rounded-full hover:shadow hover:shadow-white w-40"
-						on:click={clickSignUp}>Sign Up</button
-					>
-				</div>
-			{/if}
-			<!-- <div>
-				<button
-					class=" mr-5 bg-black text-white border-2 border-pink-500 p-3 rounded-full hover:shadow hover:shadow-white w-40"
-					on:click={clickPostJob}>post a job</button
-				>
-			</div> -->
+						Sign Up
+					</button>
+				{/if}
+			</div>
 		</div>
 	</div>
 </main>

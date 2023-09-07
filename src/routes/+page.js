@@ -1,11 +1,10 @@
 // todo
-// track how much he has earned, and how much we owe him
+// can see my jobs
 
 //EXTRAS
-// user should be able to logout, and login - done
-// once bought, shouldnt be displayed anymore -
-// user should be able to delete their photo - only loggedin and only theirs
-// html and styling
+// user should be able to delete their photo - only loggedin and only theirs!
+// once bought, shouldnt be displayed anymore!
+// loggedin users can favourite pics
 
 //ISSUE
 
