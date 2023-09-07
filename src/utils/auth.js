@@ -69,3 +69,11 @@ export function logOut() {
 
 	return true;
 }
+
+export default function getUserId() {
+	const auth = localStorage.getItem('auth');
+	if (auth) {
+		return JSON.parse(auth)['user'];
+	}
+	return null;
+}

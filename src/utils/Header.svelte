@@ -12,13 +12,9 @@
 		goto('/sign-in');
 	}
 
-	// function clickPostJob() {
-	// 	if (logIO === false) {
-	// 		goto('/users/new');
-	// 	} else {
-	// 		goto('/jobs/new');
-	// 	}
-	// }
+	function clickMyImages() {
+		goto('/my-images');
+	}
 
 	function clickSignUp() {
 		goto('/users/new');
@@ -48,14 +44,20 @@
 			</button>
 			<div class="flex space-x-4">
 				{#if logIO === true}
-					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={logOut}>
-						Log Out
-					</button>
 					<button
 						class="text-white hover:text-indigo-600 focus:outline-none"
 						on:click={clickUpload}
 					>
 						Upload Image
+					</button>
+					<button
+						class="text-white hover:text-indigo-600 focus:outline-none"
+						on:click={clickMyImages}
+					>
+						My Images
+					</button>
+					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={logOut}>
+						Log Out
 					</button>
 				{:else}
 					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={clickLogin}>
