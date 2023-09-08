@@ -1,10 +1,17 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+	import { delImageSuc, delImageFail } from '../../utils/alert.js';
+	import Spinner from '../../spinner/spinner.svelte';
+  import { loading } from '../../stores/store.js';
 	export let data;
 
 	// Function to handle image deletion
 	async function deleteImage(imageId) {
+		// spinner shits
+		loading.update((value) => {
+			return true;
+		});
 		console.log(imageId);
 		try {
 			const response = await fetch(PUBLIC_BACKEND_BASE_URL + `/deletePic/${imageId}`, {
@@ -14,15 +21,38 @@
 			const res = await response.json();
 
 			if (response.status === 204) {
+				// spinner shits
+				loading.update((value) => {
+					return false;
+				});
+				delImageSuc();
 				goto('/my-images');
+			} else if (response.status === 404) {
+				// spinner shits
+				loading.update((value) => {
+					return false;
+				});
+				delImageFail();
+				const errorData = await response.json();
+				// Handle the 404 error, which means the image was not found
+				console.error('Image not found:', errorData.error);
+			} else {
+				// spinner shits
+				loading.update((value) => {
+					return false;
+				});
+				delImageFail();
+				const errorData = await response.json();
+				// Handle other errors, such as 500 Internal Server Error
+				console.error('Error deleting image:', errorData.error);
+				// You can show an alert or update your UI to inform the user.
 			}
-			// do alerts for these
-			// else if (response.status === 404) {
-			// 	// Image not found, handle this case
-			// } else {
-			// 	// Handle other erros
-			// }
 		} catch (error) {
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
+			delImageFail();
 			console.error('Error deleting image:', error);
 			// return res.error
 		}
@@ -37,6 +67,7 @@
 	</header>
 
 	<main class="container mx-auto py-8">
+		<Spinner />
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			{#each data.images as image}
 				<div class="bg-white rounded-lg shadow-lg overflow-hidden">

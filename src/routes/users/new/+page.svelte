@@ -2,6 +2,8 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { signUpAlert, signUpEmailTaken } from '../../../utils/alert';
+	import Spinner from '../../../spinner/spinner.svelte';
+	import { loading } from '../../../stores/store';
 
 	let formErrors = {};
 
@@ -13,10 +15,10 @@
 	async function createUser(evt) {
 		evt.preventDefault();
 
-		// if (evt.target['password'].value != evt.target['password-confirmation'].value) {
-		// 	formErrors['password'] = { message: 'Password confirmation does not match' };
-		// 	return;
-		// }
+		// spinner shits
+		loading.update((value) => {
+			return true;
+		});
 
 		const userData = {
 			name: evt.target['name'].value,
@@ -35,6 +37,10 @@
 		});
 
 		if (resp.status == 200) {
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
 			postSignUp();
 
 			// const res = await authenticateUser(userData.username, userData.password);
@@ -45,8 +51,16 @@
 			// 	throw 'Sign up succeeded but authentication failed';
 			// }
 		} else if (resp.status == 500) {
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
 			signUpEmailTaken();
 		} else {
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
 			const res = await resp.json();
 
 			// formErrors = res.data;
@@ -65,6 +79,7 @@
 	</header>
 
 	<main class="container mx-auto py-8">
+		<Spinner />
 		<div class="flex justify-center items-center">
 			<form on:submit={createUser} class="w-1/2 bg-white shadow-md rounded-lg p-8">
 				<div class="mb-6">

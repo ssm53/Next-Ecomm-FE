@@ -77,3 +77,39 @@ export default function getUserId() {
 	}
 	return null;
 }
+
+export async function isLoggedIn() {
+	if (!getTokenFromLocalStorage()) {
+		return false;
+	}
+	try {
+		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/api/collections/users/auth-refresh', {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: getTokenFromLocalStorage()
+			}
+		});
+
+		const res = await resp.json();
+		if (resp.status == 200) {
+			localStorage.setItem(
+				'auth',
+				JSON.stringify({
+					token: res.token,
+					user: res.record.id
+				})
+			);
+			loggedIn.update((value) => {
+				return true;
+			});
+
+			return true;
+		}
+
+		return false;
+	} catch {
+		return false;
+	}
+}

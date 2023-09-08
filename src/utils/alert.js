@@ -12,7 +12,7 @@ function resetTimeout() {
 	timeoutId = setTimeout(() => {
 		const variable = [warningAlert, successAlert];
 		variable.forEach((index) => index.set(false));
-	}, 5000);
+	}, 3000);
 }
 
 // create all alert functions
@@ -21,6 +21,35 @@ export function signUpAlert() {
 	// used
 	successAlert.set(true);
 	alertMessage.set('sign up successful');
+	resetTimeout();
+}
+
+// uploading images alert success
+export function uploadImageSuc() {
+	successAlert.set(true);
+	alertMessage.set('Successfully uploaded image!');
+	resetTimeout();
+}
+
+export function uploadImageFail() {
+	successAlert.set(true);
+	alertMessage.set('There was an issue uploading your image. Please try again');
+	resetTimeout();
+}
+
+// deleting images alert
+
+export function delImageSuc() {
+	successAlert.set(true);
+	alertMessage.set(
+		'Successfully deleted image. Please refresh your page to see your updated images'
+	);
+	resetTimeout();
+}
+
+export function delImageFail() {
+	warningAlert.set(true);
+	alertMessage.set('Unable to delete image');
 	resetTimeout();
 }
 

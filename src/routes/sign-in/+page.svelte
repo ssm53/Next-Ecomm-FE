@@ -2,9 +2,8 @@
 	import { authenticateUser, getTokenFromLocalStorage } from '../../utils/auth';
 	import { goto } from '$app/navigation';
 	import { showLoginAlert, loginSucAlert } from '../../utils/alert';
-	// import Spinner from '../../spinner/spinner.svelte';
-	// import { loading } from '../../store/store';
-	// import { loginSucAlert, showLoginAlert } from '../../utils/alert';
+	import Spinner from '../../spinner/spinner.svelte';
+import { loading } from '../../stores/store';
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 
 	let formErrors = {};
@@ -15,10 +14,10 @@
 	async function handleSubmit(event) {
 		console.log(PUBLIC_BACKEND_BASE_URL);
 		event.preventDefault();
-		// // spinner shit
-		// loading.update((value) => {
-		// 	return true
-		// })
+		// spinner shit
+		loading.update((value) => {
+			return true;
+		});
 
 		email = event.target.email.value;
 		password = event.target.password.value;
@@ -26,10 +25,10 @@
 		const res = await authenticateUser(email, password);
 
 		if (res.success) {
-			// // spinner shits
-			// loading.update((value) => {
-			// 	return false;
-			// });
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
 			// Successful login, navigate to the home page
 			goto('/');
 			loginSucAlert();
@@ -39,9 +38,9 @@
 				formErrors = res.res.error; // Update formErrors with validation errors
 			}
 
-			// loading.update((value) => {
-			// 	return false;
-			// });
+			loading.update((value) => {
+				return false;
+			});
 			showLoginAlert();
 			// showAlert = true;
 		}
@@ -49,6 +48,7 @@
 </script>
 
 <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+	<Spinner />
 	<div class="max-w-md w-full space-y-8">
 		<div>
 			<img

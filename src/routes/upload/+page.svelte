@@ -1,8 +1,10 @@
 <script>
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
+	import Spinner from '../../spinner/spinner.svelte';
+	import { loading } from '../../stores/store';
 	import { getTokenFromLocalStorage } from '../../utils/auth';
-	// import { signUpAlert, signUpEmailTaken } from '../../../utils/alert';
+	import { uploadImageFail, uploadImageSuc } from '../../utils/alert';
 	import { uploadMedia } from '../../utils/s3-uploader';
 	import {
 		PUBLIC_AWS_REGION,
@@ -13,12 +15,16 @@
 	let formErrors = {};
 
 	export function postUpload() {
-		// signUpAlert();
+		uploadImageSuc();
 		goto('/');
 	}
 
 	async function uploadImage(evt) {
 		// evt.preventDefault();
+		// spinner shits
+		loading.update((value) => {
+			return true;
+		});
 
 		const [fileName, fileUrl] = await uploadMedia(evt.target['file'].files[0]);
 
@@ -40,8 +46,17 @@
 		});
 
 		if (resp.status == 200) {
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
 			postUpload();
 		} else {
+			// spinner shits
+			loading.update((value) => {
+				return false;
+			});
+			uploadImageFail();
 			const res = await resp.json();
 			if (res.error) {
 				formErrors = res.error; // Update formErrors with validation errors
@@ -62,6 +77,7 @@
 	</header>
 
 	<main class="container mx-auto py-8">
+		<Spinner />
 		<div class="flex justify-center items-center">
 			<form on:submit|preventDefault={uploadImage} class="w-1/2 bg-white shadow-md rounded-lg p-8">
 				<div class="mb-6">
