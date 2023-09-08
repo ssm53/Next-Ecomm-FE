@@ -16,10 +16,10 @@ export async function authenticateUser(email, password) {
 		})
 	});
 
-	// const res = await resp.json();
+	const res = await resp.json();
 
 	if (resp.status == 200) {
-		const res = await resp.json();
+		// const res = await resp.json();
 		localStorage.setItem(
 			'auth',
 			JSON.stringify({
