@@ -3,7 +3,7 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { delImageSuc, delImageFail } from '../../utils/alert.js';
 	import Spinner from '../../spinner/spinner.svelte';
-  import { loading } from '../../stores/store.js';
+	import { loading } from '../../stores/store.js';
 	export let data;
 
 	// Function to handle image deletion
@@ -18,7 +18,7 @@
 				method: 'DELETE'
 			});
 
-			const res = await response.json();
+			// const res = await response.json();
 
 			if (response.status === 204) {
 				// spinner shits
@@ -43,9 +43,7 @@
 				});
 				delImageFail();
 				const errorData = await response.json();
-				// Handle other errors, such as 500 Internal Server Error
-				console.error('Error deleting image:', errorData.error);
-				// You can show an alert or update your UI to inform the user.
+				console.error('Image not found:', errorData.error);
 			}
 		} catch (error) {
 			// spinner shits

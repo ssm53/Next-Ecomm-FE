@@ -1,10 +1,7 @@
 // todo
-// do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
-// sort out delete api
-// sort out only loggedin and see my/images page. if logged out, you get redirected
-// 30 mins come on
 
 //EXTRAS
+// do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
 // once bought, shouldnt be displayed anymore!
 // loggedin users can favourite pics
 

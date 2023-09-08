@@ -83,7 +83,7 @@ export async function isLoggedIn() {
 		return false;
 	}
 	try {
-		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/api/collections/users/auth-refresh', {
+		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/check-login', {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
