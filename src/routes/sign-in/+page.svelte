@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { showLoginAlert, loginSucAlert } from '../../utils/alert';
 	import Spinner from '../../spinner/spinner.svelte';
-import { loading } from '../../stores/store';
+	import { loading } from '../../stores/store';
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 
 	let formErrors = {};
@@ -12,7 +12,6 @@ import { loading } from '../../stores/store';
 	let password = '';
 
 	async function handleSubmit(event) {
-		console.log(PUBLIC_BACKEND_BASE_URL);
 		event.preventDefault();
 		// spinner shit
 		loading.update((value) => {
@@ -23,6 +22,8 @@ import { loading } from '../../stores/store';
 		password = event.target.password.value;
 
 		const res = await authenticateUser(email, password);
+		console.log(res); // so for here, it returns res = {invalid email or password} and success:false
+		console.log(res.res); // res.res gives {invalid email or password}
 
 		if (res.success) {
 			// spinner shits
@@ -33,16 +34,16 @@ import { loading } from '../../stores/store';
 			goto('/');
 			loginSucAlert();
 		} else {
-			// formErrors = res.data;
-			if (res.res.error) {
-				formErrors = res.res.error; // Update formErrors with validation errors
-			}
-
 			loading.update((value) => {
 				return false;
 			});
 			showLoginAlert();
-			// showAlert = true;
+
+			if (res.res.error) {
+				formErrors = res.res.error; // Update formErrors with validation errors
+				console.log(formErrors);
+				console.log(typeof formErrors);
+			}
 		}
 	}
 </script>
@@ -76,6 +77,8 @@ import { loading } from '../../stores/store';
 					/>
 					{#if 'email' in formErrors}
 						<p class="text-red-500 text-sm mt-1">{formErrors['email']}</p>
+						<!-- {:else if (formErrors = 'Email address or password not valid')}
+						<p class="text-red-500 text-sm mt-1">{formErrors}</p> -->
 					{/if}
 				</div>
 				<div>
@@ -91,6 +94,8 @@ import { loading } from '../../stores/store';
 					/>
 					{#if 'password' in formErrors}
 						<p class="text-red-500 text-sm mt-1">{formErrors['password']}</p>
+						<!-- {:else if (formErrors = 'Email address or password not valid')}
+						<p class="text-red-500 text-sm mt-1">{formErrors}</p> -->
 					{/if}
 				</div>
 			</div>

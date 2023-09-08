@@ -1,6 +1,8 @@
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 import { loggedIn } from '../stores/store';
 import { goto } from '$app/navigation';
+import { loading } from '../stores/store';
+import { showLoginAlert } from './alert';
 
 // original authenticate uer function
 export async function authenticateUser(email, password) {
@@ -17,6 +19,8 @@ export async function authenticateUser(email, password) {
 	});
 
 	const res = await resp.json();
+	console.log(res);
+	console.log(resp.status);
 
 	if (resp.status == 200) {
 		// const res = await resp.json();
@@ -38,10 +42,9 @@ export async function authenticateUser(email, password) {
 			res: res
 		};
 	} else {
-		console.log('fucking annoying');
 		return {
 			success: false,
-			res: res
+			res: res // so when our user has correct format, but wrong email, res is object with the error
 		};
 	}
 }
@@ -54,10 +57,10 @@ export function getTokenFromLocalStorage() {
 	return null;
 }
 
-// Define emptyAuth with token and user set to null
+// Define emptyAuth with token and user set to null.. can put null or empty
 const emptyAuth = {
-	token: null,
-	user: null
+	token: '',
+	user: ''
 };
 export function logOut() {
 	localStorage.setItem('auth', JSON.stringify(emptyAuth));

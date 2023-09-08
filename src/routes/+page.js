@@ -1,5 +1,5 @@
 // todo
-// check for erros with signin, signup and upload image
+// check for erros with signin and upload image
 
 //EXTRAS
 // do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
