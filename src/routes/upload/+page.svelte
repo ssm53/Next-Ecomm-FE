@@ -45,6 +45,9 @@
 			body: JSON.stringify(imageData)
 		});
 
+		const res = await resp.json();
+		console.log(res);
+
 		if (resp.status == 200) {
 			// spinner shits
 			loading.update((value) => {
@@ -57,7 +60,7 @@
 				return false;
 			});
 			uploadImageFail();
-			const res = await resp.json();
+			// const res = await resp.json();
 			if (res.error) {
 				formErrors = res.error; // Update formErrors with validation errors
 			}
