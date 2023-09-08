@@ -2,6 +2,7 @@ import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 import { loggedIn } from '../stores/store';
 import { goto } from '$app/navigation';
 
+// original authenticate uer function
 export async function authenticateUser(email, password) {
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/auth', {
 		method: 'POST',
@@ -15,9 +16,10 @@ export async function authenticateUser(email, password) {
 		})
 	});
 
-	const res = await resp.json();
+	// const res = await resp.json();
 
 	if (resp.status == 200) {
+		const res = await resp.json();
 		localStorage.setItem(
 			'auth',
 			JSON.stringify({
