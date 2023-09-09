@@ -5,6 +5,7 @@
 	import Spinner from '../../spinner/spinner.svelte';
 	import { loading } from '../../stores/store.js';
 	export let data;
+	import { getTokenFromLocalStorage } from '../../utils/auth.js'; // added for auth
 
 	// Function to handle image deletion
 	async function deleteImage(imageId) {
@@ -12,10 +13,14 @@
 		loading.update((value) => {
 			return true;
 		});
-		console.log(imageId);
+		// console.log(imageId);
 		try {
 			const response = await fetch(PUBLIC_BACKEND_BASE_URL + `/deletePic/${imageId}`, {
-				method: 'DELETE'
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: getTokenFromLocalStorage()
+				}
 			});
 
 			// const res = await response.json();

@@ -1,8 +1,8 @@
 // todo
-// check for erros with signin and upload image
+// // do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
 
 //EXTRAS
-// do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
+// marketplace shit
 // once bought, shouldnt be displayed anymore!
 // loggedin users can favourite pics
 

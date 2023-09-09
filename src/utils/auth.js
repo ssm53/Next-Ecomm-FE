@@ -19,8 +19,6 @@ export async function authenticateUser(email, password) {
 	});
 
 	const res = await resp.json();
-	console.log(res);
-	console.log(resp.status);
 
 	if (resp.status == 200) {
 		// const res = await resp.json();
@@ -85,36 +83,42 @@ export default function getUserId() {
 
 export async function isLoggedIn() {
 	if (!getTokenFromLocalStorage()) {
-		return false;
-	}
-	try {
-		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/check-login', {
-			method: 'POST',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: getTokenFromLocalStorage()
-			}
+		loggedIn.update((value) => {
+			return false;
+		});
+	} else
+		loggedIn.update((value) => {
+			return true;
 		});
 
-		const res = await resp.json();
-		if (resp.status == 200) {
-			localStorage.setItem(
-				'auth',
-				JSON.stringify({
-					token: res.token,
-					user: res.record.id
-				})
-			);
-			loggedIn.update((value) => {
-				return true;
-			});
+	// try {
+	// 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/check-login', {
+	// 		method: 'POST',
+	// 		mode: 'cors',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 			Authorization: getTokenFromLocalStorage()
+	// 		}
+	// 	});
 
-			return true;
-		}
+	// 	const res = await resp.json();
+	// 	if (resp.status == 200) {
+	// 		localStorage.setItem(
+	// 			'auth',
+	// 			JSON.stringify({
+	// 				token: res.token,
+	// 				user: res.record.id
+	// 			})
+	// 		);
+	// 		loggedIn.update((value) => {
+	// 			return true;
+	// 		});
 
-		return false;
-	} catch {
-		return false;
-	}
+	// 		return true;
+	// 	}
+
+	// 	return false;
+	// } catch {
+	// 	return false;
+	// }
 }

@@ -22,8 +22,6 @@
 		password = event.target.password.value;
 
 		const res = await authenticateUser(email, password);
-		console.log(res); // so for here, it returns res = {invalid email or password} and success:false
-		console.log(res.res); // res.res gives {invalid email or password}
 
 		if (res.success) {
 			// spinner shits
@@ -41,8 +39,6 @@
 
 			if (res.res.error) {
 				formErrors = res.res.error; // Update formErrors with validation errors
-				console.log(formErrors);
-				console.log(typeof formErrors);
 			}
 		}
 	}
