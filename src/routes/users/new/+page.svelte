@@ -9,7 +9,7 @@
 
 	export function postSignUp() {
 		signUpAlert();
-		goto('/');
+		goto('/sign-in');
 	}
 
 	async function createUser(evt) {

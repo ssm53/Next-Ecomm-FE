@@ -2,6 +2,7 @@
 // // do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
 
 //EXTRAS
+// put api for stripe in env
 // marketplace shit
 // once bought, shouldnt be displayed anymore!
 // loggedin users can favourite pics

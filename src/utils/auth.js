@@ -26,6 +26,7 @@ export async function authenticateUser(email, password) {
 			'auth',
 			JSON.stringify({
 				token: res.accessToken, // here i put access token
+				refreshToken: res.refreshToken,
 				user: res.userId
 			})
 		);
@@ -55,13 +56,21 @@ export function getTokenFromLocalStorage() {
 	return null;
 }
 
-// Define emptyAuth with token and user set to null.. can put null or empty
-const emptyAuth = {
-	token: '',
-	user: ''
-};
+// // Define emptyAuth with token and user set to null.. can put null or empty
+// const emptyAuth = {
+// 	token: '',
+// 	user: ''
+// };
+
 export function logOut() {
-	localStorage.setItem('auth', JSON.stringify(emptyAuth));
+	const authData = JSON.parse(localStorage.getItem('auth') || '{}'); // Retrieve the current auth data or use an empty object if it doesn't exist
+
+	// Clear only the token field while keeping the user field intact
+	authData.token = '';
+	authData.refreshToken = '';
+	// need to do the same for refreshtokens later
+
+	localStorage.setItem('auth', JSON.stringify(authData));
 	//SHAUNS CODE
 	loggedIn.update((value) => {
 		return false;
@@ -90,6 +99,8 @@ export async function isLoggedIn() {
 		loggedIn.update((value) => {
 			return true;
 		});
+
+	// here we need to get userid from our local storage
 
 	// try {
 	// 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/check-login', {
