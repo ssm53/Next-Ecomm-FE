@@ -1,5 +1,5 @@
 // todo
-// // do refresh log out api - to refresh authentication so that even when loggedin, it'll continue to be logged in
+// fix reload shit. why does it not reload???
 
 //EXTRAS
 // put api for stripe in env

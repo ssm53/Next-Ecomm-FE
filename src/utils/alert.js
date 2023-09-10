@@ -17,6 +17,13 @@ function resetTimeout() {
 
 // create all alert functions
 
+//logout fail alert
+export function logoutFailAlert() {
+	warningAlert.set(true);
+	alertMessage.set('There was an issue logging out');
+	resetTimeout();
+}
+
 export function signUpAlert() {
 	// used
 	successAlert.set(true);
