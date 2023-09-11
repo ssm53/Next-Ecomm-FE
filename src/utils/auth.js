@@ -156,12 +156,13 @@ export async function isLoggedIn() {
 		refreshToken: passedRefreshToken
 	};
 
+	console.log(bodyDetails);
+
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/authRefresh', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {
-			'Content-Type': 'application/json',
-			Authorization: getTokenFromLocalStorage()
+			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(bodyDetails)
 	});
