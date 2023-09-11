@@ -8,8 +8,6 @@ let images = [];
 export async function load({ fetch }) {
 	userId = getUserId();
 	console.log(userId);
-	// const requestedUserId = params.userId;
-	// console.log(requestedUserId);
 
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/my-images/${userId}`, {
 		method: 'GET'
@@ -23,10 +21,6 @@ export async function load({ fetch }) {
 	}
 
 	if (resp.status === 200) {
-		// console.log(res.userid);
-		// console.log(typeof res.userid);
-		// console.log(userId);
-		// console.log(typeof userId);
 		return {
 			images: res.myImages
 		};

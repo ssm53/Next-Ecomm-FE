@@ -8,6 +8,8 @@
 // once bought, shouldnt be displayed anymore!
 // loggedin users can favourite pics
 
+// have to make sure to do git pull after merge on github
+
 //ISSUE
 
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
