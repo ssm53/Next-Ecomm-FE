@@ -40,6 +40,7 @@
 			if (res.res.error) {
 				formErrors = res.res.error; // Update formErrors with validation errors
 			}
+			console.log(formErrors);
 		}
 	}
 </script>
@@ -73,8 +74,6 @@
 					/>
 					{#if 'email' in formErrors}
 						<p class="text-red-500 text-sm mt-1">{formErrors['email']}</p>
-						<!-- {:else if (formErrors = 'Email address or password not valid')}
-						<p class="text-red-500 text-sm mt-1">{formErrors}</p> -->
 					{/if}
 				</div>
 				<div>
@@ -90,8 +89,6 @@
 					/>
 					{#if 'password' in formErrors}
 						<p class="text-red-500 text-sm mt-1">{formErrors['password']}</p>
-						<!-- {:else if (formErrors = 'Email address or password not valid')}
-						<p class="text-red-500 text-sm mt-1">{formErrors}</p> -->
 					{/if}
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 // todo
-// fix reload shit. why does it not reload???
+// fix wrong email and password issue.
+// fix verificaton of accesstokens in verifyaccesstokens cause now we got expiry
 
 //EXTRAS
 // put api for stripe in env
