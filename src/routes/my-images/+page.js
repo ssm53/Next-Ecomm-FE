@@ -17,7 +17,7 @@ export async function load({ fetch }) {
 	const res = await resp.json();
 
 	// added this for redirect
-	if (res.userid != userId) {
+	if (res.userId != userId) {
 		console.log('not working aiyo');
 		console.log(res);
 		throw redirect(307, `/`);
