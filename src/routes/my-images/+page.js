@@ -8,6 +8,7 @@ let images = [];
 export async function load({ fetch }) {
 	userId = getUserId();
 	console.log(userId);
+	console.log(typeof userId);
 
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/my-images/${userId}`, {
 		method: 'GET'
@@ -16,7 +17,9 @@ export async function load({ fetch }) {
 	const res = await resp.json();
 
 	// added this for redirect
-	if (res.userid !== userId) {
+	if (res.userid != userId) {
+		console.log('not working aiyo');
+		console.log(res);
 		throw redirect(307, `/`);
 	}
 
